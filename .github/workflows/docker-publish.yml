@@ -11,28 +11,13 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v2
-     # -
-     #   name: Publish
-     #   uses: matootie/github-docker@v3.1.0
-     #   with:
-     #     accessToken: ${{ secrets.GITHUB_TOKEN }}
-     #     imageName: hdf5_1_12_on_2010_x86_64
-     #     containerRegistry: true
-     #     contextName: ./Dockerfile_2010_x86_64
-          
+        uses: actions/checkout@v2        
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-     # -
-     #   name: Login to DockerHub
-     #   uses: docker/login-action@v1 
-     #   with:
-     #     username: ${{ secrets.DOCKERHUB_USERNAME }}
-     #     password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Login to GitHub Container Registry
         uses: docker/login-action@v1 
@@ -41,12 +26,47 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       -
-        name: Build and push
+        name: Build and push 2010_x86_64 image
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile_2010_x86_64
           platforms: linux/amd64
-          #platforms: linux/amd64,linux/arm64
           push: true
           tags: ghcr.io/q-posev/hdf5_1_12_on_2010_x86_64:latest
+      -
+        name: Build and push 2014_x86_64 image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile_2014_x86_64
+          platforms: linux/amd64
+          push: true
+          tags: ghcr.io/q-posev/hdf5_1_12_on_2014_x86_64:latest
+      -
+        name: Build and push 2_24_x86_64 image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile_2_24_x86_64
+          platforms: linux/amd64
+          push: true
+          tags: ghcr.io/q-posev/hdf5_1_12_on_2_24_x86_64:latest
+      -
+        name: Build and push 2014_aarch64 image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile_2014_aarch64
+          platforms: linux/arm64
+          push: true
+          tags: ghcr.io/q-posev/hdf5_1_12_on_2014_aarch64:latest
+      -
+        name: Build and push 2_24_aarch64 image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile_2_24_aarch64
+          platforms: linux/arm64
+          push: true
+          tags: ghcr.io/q-posev/hdf5_1_12_on_2_24_aarch64:latest
