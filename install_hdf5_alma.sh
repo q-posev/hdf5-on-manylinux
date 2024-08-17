@@ -6,7 +6,7 @@
 set -euo pipefail
 
 echo "Installing zlib with yum"
-yum -y install zlib-devel
+dnf -y install zlib-devel wget
 
 pushd /tmp
 
@@ -14,7 +14,8 @@ pushd /tmp
 ldconfig
 
 echo "Downloading & unpacking HDF5 ${HDF5_VERSION}"
-curl -fsSLO "https://github.com/HDFGroup/hdf5/archive/refs/tags/hdf5-$HDF5_VERSION.tar.gz"
+
+wget https://github.com/HDFGroup/hdf5/archive/refs/tags/hdf5-$HDF5_VERSION.tar.gz
 tar -xzvf hdf5-$HDF5_VERSION.tar.gz
 pushd hdf5-hdf5-$HDF5_VERSION
 chmod u+x autogen.sh
@@ -30,4 +31,4 @@ echo "Cleaning up unnecessary files"
 rm -r hdf5-hdf5-$HDF5_VERSION
 rm hdf5-$HDF5_VERSION.tar.gz
 
-yum -y erase zlib-devel
+dnf -y erase zlib-devel
