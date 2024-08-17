@@ -26,15 +26,6 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       -
-        name: Build and push 2010_x86_64 image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile_2010_x86_64
-          platforms: linux/amd64
-          push: true
-          tags: ghcr.io/q-posev/hdf5_1_12_on_2010_x86_64:latest
-      -
         name: Build and push 2014_x86_64 image
         uses: docker/build-push-action@v2
         with:
@@ -44,29 +35,11 @@ jobs:
           push: true
           tags: ghcr.io/q-posev/hdf5_1_12_on_2014_x86_64:latest
       -
-        name: Build and push 2_24_x86_64 image
+        name: Build and push 2_28_x86_64 image
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile_2_24_x86_64
+          file: ./Dockerfile_2_28_x86_64
           platforms: linux/amd64
           push: true
-          tags: ghcr.io/q-posev/hdf5_1_12_on_2_24_x86_64:latest
-      -
-        name: Build and push 2014_aarch64 image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile_2014_aarch64
-          platforms: linux/arm64
-          push: true
-          tags: ghcr.io/q-posev/hdf5_1_12_on_2014_aarch64:latest
-      -
-        name: Build and push 2_24_aarch64 image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile_2_24_aarch64
-          platforms: linux/arm64
-          push: true
-          tags: ghcr.io/q-posev/hdf5_1_12_on_2_24_aarch64:latest
+          tags: ghcr.io/q-posev/hdf5_1_12_on_2_28_x86_64:latest
